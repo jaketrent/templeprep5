@@ -1,0 +1,25 @@
+html,
+body {
+  font-size: 24px;
+}
+
+.big {
+  font-size: 3rem;
+}
+.small {
+  font-size: 0.75rem;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+}
+.slide {
+  display: none;
+}
+.slide--hide {
+  display: none;
+}
+.slide--show {
+  display: block;
+}

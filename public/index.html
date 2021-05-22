@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Temple Prep Lesson 5</title>
+    <link rel="stylesheet" href="/styles.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <div id="root">Loading...</div>
+
+    <div class="controls">
+      <button id="prev">Prev</button>
+      <button id="next">Next</button>
+    </div>
+
+    <div class="slide slide--welcome">
+      <div class="big">Welcome!</div>
+    </div>
+
+    <div class="slide slide--song">
+      <div class="small">
+        <p>
+        <div>Have I Done Any Good?</div>
+        </p>
+        <p>
+        <div>1. Have I done any good in the world today?</div>
+        <div>Have I helped anyone in need?</div>
+        <div>Have I cheered up the sad and made someone feel glad?</div>
+        <div>If not, I have failed indeed.</div>
+        <div>Has anyone’s burden been lighter today</div>
+        <div>Because I was willing to share?</div>
+        <div>Have the sick and the weary been helped on their way?</div>
+        <div>When they needed my help was I there?</div>
+        </p>
+        <p>
+        <div>[Chorus]</div>
+        <div>Then wake up and do something more</div>
+        <div>Than dream of your mansion above.</div>
+        <div>A blessing of duty and love.</div>
+        </p>
+        <p>
+        <div>2. There are chances for work all around just now,</div>
+        <div>Opportunities right in our way.</div>
+        <div>Do not let them pass by, saying, “Sometime I’ll try,”</div>
+        <div>But go and do something today.</div>
+        <div>’Tis noble of man to work and to give;</div>
+        <div>Love’s labor has merit alone.</div>
+        <div>Only he who does something helps others to live.</div>
+        <div>To God each good work will be known.</div>
+        </p>
+      </div>
+    </div>
+
+    <script src="/nodemod/socket.io/client-dist/socket.io.js" charset="utf-8"></script>
+    <script charset="utf-8">
+      const prev = document.querySelector('#prev')
+      const next = document.querySelector('#next')
+
+      prev.addEventListener('click', () => alert('prev'))
+      next.addEventListener('click', () => alert('next'))
+
+      const socket = io("ws://localhost:3001");
+
+      socket.on("connect", () => {
+        // either with send()
+        socket.send("Hello!");
+
+        // or with emit() and custom event names
+        socket.emit("salutations", "Hello!", { "mr": "john" }, Uint8Array.from([1, 2, 3, 4]));
+      });
+
+      // handle the event sent with socket.send()
+      socket.on("message", data => {
+        console.log(data);
+      });
+
+      // handle the event sent with socket.emit()
+      socket.on("welcome", handleWelcome);
+
+
+      function handleWelcome() {
+        document.querySelector("#root").innerHTML = "";
+
+        log('welcome')
+        slide('welcome').show()
+      }
+
+      function log() {
+        console.log.apply(this, arguments)
+      }
+
+      function slide(name) {
+        const el = document.querySelector('.slide--' + name)
+
+        return {
+          hide() {
+            el.classList.add('slide--hide')
+          },
+          show() {
+            el.classList.add('slide--show')
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
