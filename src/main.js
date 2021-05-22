@@ -19,8 +19,9 @@ io.on('connection', (socket) => {
   })
 
   // handle the event sent with socket.emit()
-  socket.on('salutations', (elem1, elem2, elem3) => {
-    console.log(elem1, elem2, elem3)
+  socket.on('advancing', (state) => {
+    console.log('advancing', state)
+    io.emit('advance', state)
   })
 })
 

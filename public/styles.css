@@ -14,10 +14,8 @@ body {
   position: absolute;
   bottom: 0;
 }
+
 .slide {
-  display: none;
-}
-.slide--hide {
   display: none;
 }
 .slide--show {
