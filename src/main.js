@@ -4,6 +4,8 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
+const PORT = process.env.PORT || 3001
+
 app.use((req, res, next) => {
   res.io = io
 
@@ -28,4 +30,4 @@ io.on('connection', (socket) => {
 app.use('/nodemod', express.static(path.join(__dirname, '..', 'node_modules')))
 app.use(express.static('public'))
 
-server.listen(3001)
+server.listen(PORT)
