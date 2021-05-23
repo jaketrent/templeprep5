@@ -10,8 +10,8 @@ let state = {
   i: -1,
 }
 
-const socket = io('http://localhost:3001')
-// const socket = io("https://templeprep5.herokuapp.com");
+// const socket = io('http://localhost:3001')
+const socket = io('https://templeprep5.herokuapp.com')
 
 // TODO: rm?
 socket.on('connect', () => {
