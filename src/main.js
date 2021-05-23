@@ -12,8 +12,10 @@ app.use((req, res, next) => {
   next()
 })
 
+let clientState = { i: 0 }
+
 io.on('connection', (socket) => {
-  socket.emit('welcome')
+  socket.emit('welcome', clientState)
 
   // handle the event sent with socket.send()
   socket.on('message', (data) => {
@@ -22,8 +24,9 @@ io.on('connection', (socket) => {
 
   // handle the event sent with socket.emit()
   socket.on('advancing', (state) => {
-    console.log('advancing', state)
-    io.emit('advance', state)
+    clientState = state
+    console.log('advancing to', clientState)
+    io.emit('advance', clientState)
   })
 })
 
