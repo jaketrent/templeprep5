@@ -12,11 +12,6 @@ let state = {
 
 const socket = io(window.SERVER_HOST)
 
-// TODO: rm?
-socket.on('connect', () => {
-  //socket.emit("salutations", "Hello!", { "mr": "john" }, Uint8Array.from([1, 2, 3, 4]));
-})
-
 socket.on('welcome', handleWelcome)
 socket.on('advance', handleAdvance)
 
@@ -60,9 +55,6 @@ function slide(nameOrIndex) {
   else el = document.querySelectorAll('.slide')[nameOrIndex]
 
   return {
-    hide() {
-      el.classList.remov('slide--show')
-    },
     show() {
       slides.forEach((slide) => slide.classList.remove('slide--show'))
       el.classList.add('slide--show')
