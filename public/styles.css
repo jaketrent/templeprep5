@@ -96,3 +96,9 @@ li {
 .slide--show {
   display: block;
 }
+.slide--jake {
+  border-top: 5px solid lightblue;
+}
+.slide--april {
+  border-top: 5px solid pink;
+}
